@@ -1,0 +1,22 @@
+{
+  "name": "ws2801-homekit",
+  "version": "0.0.1",
+  "description": "A library built for ws2801 led strip home-kit support",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josefernanlo/ws2801.git"
+  },
+  "author": "Jose Fernandez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/josefernanlo/ws2801/issues"
+  },
+  "homepage": "https://github.com/josefernanlo/ws2801#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
