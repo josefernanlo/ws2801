@@ -1,0 +1,53 @@
+{
+    "total": 100,
+    "segments": [
+        {
+            "from": 10,
+            "to": 20,
+            "animations": {
+                "power": {
+                    "animationName": "",
+                    "animationDuration": "",
+                    "animationDelay": ""
+                },
+                "color": {
+                    "animationName": "",
+                    "animationDuration": "",
+                    "animationDelay": ""
+                }
+            }
+        },
+        {
+            "from": 20,
+            "to": 30,
+            "animations": {
+                "power": {
+                    "animationName": "",
+                    "animationDuration": "",
+                    "animationDelay": ""
+                },
+                "color": {
+                    "animationName": "",
+                    "animationDuration": "",
+                    "animationDelay": ""
+                }
+            }
+        },
+        {
+            "from": 30,
+            "to": 40,
+            "animations": {
+                "power": {
+                    "animationName": "",
+                    "animationDuration": "",
+                    "animationDelay": ""
+                },
+                "color": {
+                    "animationName": "",
+                    "animationDuration": "",
+                    "animationDelay": ""
+                }
+            }
+        }
+    ]
+}

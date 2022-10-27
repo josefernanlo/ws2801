@@ -11,9 +11,11 @@ const accessoryUuid = hap.uuid.generate("light");
 const accessory = new Accessory("WS2801", accessoryUuid);
 
 const lightService = new Service.Lightbulb("Example Lightbulb");
+const LightMethods = require('./src/WS2801').LightAccessory;
 
 let currentLightState = false;
 let currentBrightnessLevel = 0;
+let currentColor = '';
 
 const onCharacteristic = lightService.getCharacteristic(Characteristic.On);
 const brightnessCharacteristic = lightService.getCharacteristic(Characteristic.Brightness);
@@ -26,8 +28,7 @@ onCharacteristic.on(CharacteristicEventTypes.GET, callback => {
 });
 
 onCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
-    console.log("Setting light state to: " + value);
-    currentLightState = value;
+    currentLightState = LightMethods.setPower(value);
     callback();
 });
 
@@ -39,19 +40,18 @@ brightnessCharacteristic.on(CharacteristicEventTypes.GET, (callback) => {
 });
 
 brightnessCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
-    currentBrightnessLevel = value;
+    currentBrightnessLevel = LightMethods.setBrightness(value);
     callback();
 });
 
 
 // Color characteristic
 colorCharacteristic.on(CharacteristicEventTypes.GET, (callback) => {
-    console.log("Queried current brightness level: " + currentBrightnessLevel);
     callback(undefined, currentBrightnessLevel);
 });
 
 colorCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
-    currentBrightnessLevel = value;
+    currentColor = LightMethods.setHue(value);
     callback();
 });
 
