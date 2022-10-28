@@ -1,7 +1,12 @@
 require('node-persist').initSync();
 const hap = require("hap-nodejs");
 
-// const uuid = require('hap-nodejs').uuid;
+// Required to excute Python files
+const express = require('express');
+const app = express();
+const { spawn } = require('child_process');
+
+
 const Accessory = hap.Accessory;
 const Service = hap.Service;
 const Characteristic = hap.Characteristic;
@@ -11,7 +16,6 @@ const accessoryUuid = hap.uuid.generate("light");
 const accessory = new Accessory("WS2801", accessoryUuid);
 
 const lightService = new Service.Lightbulb("Example Lightbulb");
-const LightMethods = require('./src/WS2801').LightAccessory;
 
 let currentLightState = false;
 let currentBrightnessLevel = 0;
@@ -28,7 +32,7 @@ onCharacteristic.on(CharacteristicEventTypes.GET, callback => {
 });
 
 onCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
-    currentLightState = LightMethods.setPower(value);
+    currentLightState = setPower(value);
     callback();
 });
 
@@ -40,7 +44,7 @@ brightnessCharacteristic.on(CharacteristicEventTypes.GET, (callback) => {
 });
 
 brightnessCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
-    currentBrightnessLevel = LightMethods.setBrightness(value);
+    currentBrightnessLevel = setBrightness(value);
     callback();
 });
 
@@ -51,15 +55,28 @@ colorCharacteristic.on(CharacteristicEventTypes.GET, (callback) => {
 });
 
 colorCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
-    currentColor = LightMethods.setHue(value);
+    currentColor = setHue(value);
     callback();
 });
 
-accessory.addService(lightService);
+// Setters
+const setPower = (status) => {
+    spawn('python', ['./lib/functions.py', 1, status]);
+    return status
+}
+const setBrightness = (brightness) => {
+    spawn('python', ['./lib/functions.py', 2, brightness]);
+    return brightness
+}
+const setHue = (hue) => {
+    spawn('python', ['./lib/functions.py', 3, hue]);
+    return hue
+}
 
 // Publishing Accesory
 
 const ifaces = require('macaddress').networkInterfaces();
+accessory.addService(lightService);
 
 accessory.publish({
     username: ifaces[Object.keys(ifaces)[0]].mac.toUpperCase(),
