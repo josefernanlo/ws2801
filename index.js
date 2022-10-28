@@ -61,15 +61,15 @@ colorCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
 
 // Setters
 const setPower = (status) => {
-    spawn('python', ['./lib/functions.py', 1, status]);
+    spawn('python3', ['./lib/functions.py', 1, status]);
     return status
 }
 const setBrightness = (brightness) => {
-    spawn('python', ['./lib/functions.py', 2, brightness]);
+    spawn('python3', ['./lib/functions.py', 2, brightness]);
     return brightness
 }
 const setHue = (hue) => {
-    spawn('python', ['./lib/functions.py', 3, hue]);
+    spawn('python3', ['./lib/functions.py', 3, hue]);
     return hue
 }
 
