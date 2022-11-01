@@ -20,7 +20,7 @@ const lightService = new Service.Lightbulb("Example Lightbulb");
 let currentLightState = false;
 let currentBrightnessLevel = 0;
 let currentColor = 0;
-let currentSaturarion = 0;
+let currentSaturation = 0;
 
 const onCharacteristic = lightService.getCharacteristic(Characteristic.On);
 const brightnessCharacteristic = lightService.getCharacteristic(Characteristic.Brightness);
@@ -70,7 +70,7 @@ saturationCharacteristic.on(CharacteristicEventTypes.GET, (callback) => {
 
 saturationCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
     console.log('Saturation' + value);
-    currentSaturarion = setSaturation(value);
+    currentSaturation = setSaturation(value);
     callback();
 });
 
