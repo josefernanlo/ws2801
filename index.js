@@ -1,3 +1,6 @@
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+
 require('node-persist').initSync();
 const hap = require("hap-nodejs");
 import {setBrightness, setHue, setPower, setSaturation, init} from './lib/functions.js'
