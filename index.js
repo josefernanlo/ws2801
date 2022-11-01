@@ -24,6 +24,7 @@ let currentColor = '';
 const onCharacteristic = lightService.getCharacteristic(Characteristic.On);
 const brightnessCharacteristic = lightService.getCharacteristic(Characteristic.Brightness);
 const colorCharacteristic = lightService.getCharacteristic(Characteristic.Hue);
+const saturationCharacteristic = lightService.getCharacteristic(Characteristic.Saturation);
 
 
 // ON / OFF characteristic
@@ -51,11 +52,21 @@ brightnessCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
 
 // Color characteristic
 colorCharacteristic.on(CharacteristicEventTypes.GET, (callback) => {
-    callback(undefined, currentBrightnessLevel);
+    callback(undefined, currentColor);
 });
 
 colorCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
     currentColor = setHue(value);
+    callback();
+});
+
+// Saturation Characteristic
+saturationCharacteristic.on(CharacteristicEventTypes.GET, (callback) => {
+    callback(undefined, currentSaturation);
+});
+
+saturationCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
+    currentSaturarion = setSaturation(value);
     callback();
 });
 
@@ -71,6 +82,10 @@ const setBrightness = (brightness) => {
 const setHue = (hue) => {
     spawn('python3', ['./lib/functions.py', 3, hue]);
     return hue
+}
+
+const setSaturation = (saturation) => {
+    return saturation
 }
 
 // Publishing Accesory
