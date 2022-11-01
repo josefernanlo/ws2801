@@ -1,16 +1,6 @@
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-
 require('node-persist').initSync();
 const hap = require("hap-nodejs");
-import {setBrightness, setHue, setPower, setSaturation, init} from './lib/functions.js'
-
-// Required to excute Python files
-const express = require('express');
-const app = express();
-const { spawn } = require('child_process');
-
-init();
+const ledFunctions = require("./lib/functions").ledStrip;
 
 
 const Accessory = hap.Accessory;
@@ -40,7 +30,7 @@ onCharacteristic.on(CharacteristicEventTypes.GET, callback => {
 });
 
 onCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
-    currentLightState = setPower(value);
+    currentLightState = ledFunctions.setPower(value);
     callback();
 });
 
@@ -53,7 +43,7 @@ brightnessCharacteristic.on(CharacteristicEventTypes.GET, (callback) => {
 
 brightnessCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
     console.log('Brigthness' + value)
-    currentBrightnessLevel = setBrightness(value);
+    currentBrightnessLevel = ledFunctions.setBrightness(value);
     callback();
 });
 
@@ -65,7 +55,7 @@ colorCharacteristic.on(CharacteristicEventTypes.GET, (callback) => {
 
 colorCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
     console.log('Color' + value);
-    currentColor = setHue(value);
+    currentColor = ledFunctions.setHue(value);
     callback();
 });
 
@@ -76,7 +66,7 @@ saturationCharacteristic.on(CharacteristicEventTypes.GET, (callback) => {
 
 saturationCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
     console.log('Saturation' + value);
-    currentSaturation = setSaturation(value);
+    currentSaturation = ledFunctions.setSaturation(value);
     callback();
 });
 
