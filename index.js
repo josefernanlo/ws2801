@@ -1,10 +1,13 @@
 require('node-persist').initSync();
 const hap = require("hap-nodejs");
+import {setBrightness, setHue, setPower, setSaturation, init} from './lib/functions.js'
 
 // Required to excute Python files
 const express = require('express');
 const app = express();
 const { spawn } = require('child_process');
+
+init();
 
 
 const Accessory = hap.Accessory;
@@ -73,24 +76,6 @@ saturationCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
     currentSaturation = setSaturation(value);
     callback();
 });
-
-// Setters
-const setPower = (status) => {
-    spawn('python3', ['./lib/functions.py', 1, status]);
-    return status
-}
-const setBrightness = (brightness) => {
-    spawn('python3', ['./lib/functions.py', 2, brightness]);
-    return brightness
-}
-const setHue = (hue) => {
-    spawn('python3', ['./lib/functions.py', 3, hue]);
-    return hue
-}
-
-const setSaturation = (saturation) => {
-    return saturation
-}
 
 // Publishing Accesory
 
