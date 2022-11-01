@@ -20,6 +20,7 @@ const lightService = new Service.Lightbulb("Example Lightbulb");
 let currentLightState = false;
 let currentBrightnessLevel = 0;
 let currentColor = '';
+let currentSaturarion = '';
 
 const onCharacteristic = lightService.getCharacteristic(Characteristic.On);
 const brightnessCharacteristic = lightService.getCharacteristic(Characteristic.Brightness);
