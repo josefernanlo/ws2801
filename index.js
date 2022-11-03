@@ -1,4 +1,5 @@
 require('node-persist').initSync();
+
 const hap = require("hap-nodejs");
 const ledFunctions = require("./lib/functions").ledStrip;
 
@@ -37,12 +38,10 @@ onCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
 
 // Brightness characteristic
 brightnessCharacteristic.on(CharacteristicEventTypes.GET, (callback) => {
-    console.log("Queried current brightness level: " + currentBrightnessLevel);
     callback(undefined, currentBrightnessLevel);
 });
 
 brightnessCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
-    console.log('Brigthness' + value)
     currentBrightnessLevel = ledFunctions.setBrightness(value);
     callback();
 });
@@ -54,7 +53,6 @@ colorCharacteristic.on(CharacteristicEventTypes.GET, (callback) => {
 });
 
 colorCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
-    console.log('Color' + value);
     currentColor = ledFunctions.setHue(value);
     callback();
 });
@@ -65,7 +63,6 @@ saturationCharacteristic.on(CharacteristicEventTypes.GET, (callback) => {
 });
 
 saturationCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
-    console.log('Saturation' + value);
     currentSaturation = ledFunctions.setSaturation(value);
     callback();
 });
