@@ -1,6 +1,6 @@
 {
   "name": "ws2801-homekit",
-  "version": "0.5.3",
+  "version": "0.3.0",
   "description": "A library built for ws2801 led strip home-kit support",
   "main": "index.js",
   "scripts": {
