@@ -19,6 +19,7 @@
   "dependencies": {
     "hap-nodejs": "^0.10.4",
     "macaddress": "^0.2.8",
-    "rpi-ws2801": "^0.0.4"
+    "rpi-ws2801": "^0.0.4",
+    "onecolor": "^3.0.4"
   }
 }

@@ -14,11 +14,6 @@ const accessory = new Accessory("WS2801", accessoryUuid);
 
 const lightService = new Service.Lightbulb("Example Lightbulb");
 
-let currentLightState = false;
-let currentBrightnessLevel = 0;
-let currentColor = 0;
-let currentSaturation = 0;
-
 const onCharacteristic = lightService.getCharacteristic(Characteristic.On);
 const brightnessCharacteristic = lightService.getCharacteristic(Characteristic.Brightness);
 const colorCharacteristic = lightService.getCharacteristic(Characteristic.Hue);
@@ -27,43 +22,43 @@ const saturationCharacteristic = lightService.getCharacteristic(Characteristic.S
 
 // ON / OFF characteristic
 onCharacteristic.on(CharacteristicEventTypes.GET, callback => {
-    callback(undefined, currentLightState);
+    callback(null, ledFunctions.getPower());
 });
 
 onCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
-    currentLightState = ledFunctions.setPower(value);
+    ledFunctions.setPower(value);
     callback();
 });
 
 
 // Brightness characteristic
 brightnessCharacteristic.on(CharacteristicEventTypes.GET, (callback) => {
-    callback(undefined, currentBrightnessLevel);
+    callback(null, ledFunctions.getBrightness());
 });
 
 brightnessCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
-    currentBrightnessLevel = ledFunctions.setBrightness(value);
+    ledFunctions.setBrightness(value);
     callback();
 });
 
 
 // Color characteristic
 colorCharacteristic.on(CharacteristicEventTypes.GET, (callback) => {
-    callback(undefined, currentColor);
+    callback(null, ledFunctions.getHue());
 });
 
 colorCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
-    currentColor = ledFunctions.setHue(value);
+    ledFunctions.setHue(value);
     callback();
 });
 
 // Saturation Characteristic
 saturationCharacteristic.on(CharacteristicEventTypes.GET, (callback) => {
-    callback(undefined, currentSaturation);
+    callback(null, ledFunctions.getSaturation());
 });
 
 saturationCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
-    currentSaturation = ledFunctions.setSaturation(value);
+    ledFunctions.setSaturation(value);
     callback();
 });
 
