@@ -69,7 +69,7 @@ accessory.addService(lightService);
 
 accessory.publish({
     username: ifaces[Object.keys(ifaces)[0]].mac.toUpperCase(),
-    pincode: "678-90-876",
-    port: 47129,
+    pincode: "678-90-877",
+    port: 51870,
     category: hap.Categories.LIGHTBULB,
 });
