@@ -44,11 +44,11 @@ brightnessCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
 
 // Color characteristic
 colorCharacteristic.on(CharacteristicEventTypes.GET, (callback) => {
-    callback(null, ledFunctions.getHue());
+    callback(null, ledFunctions.getSaturation());
 });
 
 colorCharacteristic.on(CharacteristicEventTypes.SET, (value, callback) => {
-    ledFunctions.setHue(value);
+    ledFunctions.setSaturation(value);
     callback();
 });
 
